@@ -13,7 +13,7 @@ pipeline {
             }
         }
         
-        parallel{
+        parallel(
              stage ('Deploy to Staging'){
                 steps {
                     build job: 'Deploy-to-staging'
@@ -24,7 +24,7 @@ pipeline {
                     build job: 'static analysis'
                 }
              } 
-        }
+        )
        
 
         stage ('Deploy to Production'){
