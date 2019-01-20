@@ -12,11 +12,20 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy to Staging'){
-            steps {
-                build job: 'Deploy-to-staging'
-            }
+        
+        parallel{
+             stage ('Deploy to Staging'){
+                steps {
+                    build job: 'Deploy-to-staging'
+                }
+             }   
+             stage ('Code Quality'){
+                steps {
+                    build job: 'static analysis'
+                }
+             } 
         }
+       
 
         stage ('Deploy to Production'){
             steps{
